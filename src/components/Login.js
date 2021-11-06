@@ -34,7 +34,7 @@ const Login = () => {
 export default Login;
 
 const Container = styled.div`
-  max-width: 1150px;
+  max-width: 1128px;
   width: 100%;
   margin: auto;
   padding: 0;
@@ -103,12 +103,14 @@ const SignIn = styled.a`
 
 const Section = styled.section`
   display: flex;
+  align-items: center;
   min-height: 700px;
   padding-bottom: 140px;
   padding-top: 40px;
   position: relative;
   flex-wrap: wrap;
   width: 100%;
+  height: calc(100vh - 80px);
 
   @media (max-width: 768px) {
     min-height: 0;
