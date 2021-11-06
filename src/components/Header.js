@@ -193,7 +193,7 @@ const NavList = styled.li`
     justify-content: center;
     background: transparent;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     min-height: 52px;
     min-width: 80px;
