@@ -66,6 +66,9 @@ const Header = () => {
                   <img src="/images/down-icon.svg" alt="" />
                 </span>
               </a>
+              <SignOut>
+                <a>Sign Out</a>
+              </SignOut>
             </User>
             <Work>
               <a>
@@ -218,7 +221,23 @@ const NavList = styled.li`
   }
 `;
 
+const SignOut = styled.div`
+  position: absolute;
+  top: 50px;
+  width: 100px;
+  border-radius: 4px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 5px 10px;
+  background: #fff;
+  transition: 0.3s ease;
+  display: none;
+
+  a {
+    font-size: 0.9rem;
+  }
+`;
+
 const User = styled(NavList)`
+  cursor: pointer;
   a > img {
     width: 25px;
     height: 25px;
@@ -227,6 +246,13 @@ const User = styled(NavList)`
   span {
     display: flex;
     align-items: center;
+  }
+
+  &:hover {
+    ${SignOut} {
+      display: block;
+      top: 53px;
+    }
   }
 `;
 const Work = styled(User)`
