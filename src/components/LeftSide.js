@@ -35,6 +35,26 @@ const LeftSide = () => {
           </span>
         </Item>
       </ArtCard>
+      <CommunityCard>
+        <a>
+          <span>Recent</span>
+        </a>
+        <a>
+          <span>Groups</span>
+        </a>
+        <a>
+          <span>
+            Events
+            <img src="/images/plus-icon.svg" alt="" />
+          </span>
+        </a>
+        <a>
+          <span>Followed Hashtags</span>
+        </a>
+        <a>
+          <span>Discover More</span>
+        </a>
+      </CommunityCard>
     </Container>
   );
 };
@@ -138,10 +158,51 @@ const Item = styled.a`
 
   span {
     display: flex;
-    align-items: c;
+    align-items: center;
   }
 
   img {
     margin-right: 0.3rem;
+  }
+`;
+
+const CommunityCard = styled(ArtCard)`
+  margin-top: 20px;
+  padding-top: 10px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+
+  a {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #0a66c2;
+
+    span {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &:last-child {
+      color: rgba(0, 0, 0, 0.6);
+      text-decoration: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.15);
+      display: block;
+      text-align: center;
+      padding: 12px;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.08);
+      }
+      span {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
