@@ -146,6 +146,7 @@ const HeroImage = styled.div`
     width: 100%;
   }
 `;
+
 const Form = styled.div`
   margin-top: 10rem;
   width: 85%;
@@ -169,7 +170,6 @@ const Google = styled.button`
   background: #fff;
   height: 56px;
   font-size: 1.1rem;
-  /* box-shadow: rgba(149, 157, 165, 0.15) 0px 8px 10px; */
   cursor: pointer;
   transition: all 0.3s;
   box-shadow: inset 0 0 0 2px #006097;
