@@ -27,6 +27,7 @@ const Home = () => {
 export default Home;
 
 const Container = styled.div`
+  padding: 0 15px;
   padding-top: 70px;
   max-width: 1128px;
   width: 100%;
@@ -55,7 +56,7 @@ const Section = styled.div`
 const Layout = styled.div`
   display: grid;
   grid-template-areas: "leftside main rightside";
-  grid-template-columns: minmax(0, 5fr) minmax(0, 15fr) minmax(0, 4fr);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 12fr) minmax(300px, 1fr);
   column-gap: 25px;
   grid-template-rows: auto;
   margin: 25px 0;
