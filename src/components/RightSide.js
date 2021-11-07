@@ -191,18 +191,22 @@ const FeedList = styled.ul`
       }
 
       button {
+        box-shadow: inset 0 0 0 1px #006097;
         background: transparent;
         border: none;
         outline: none;
-        margin-top: 0.2rem;
-        background: rgba(0, 0, 0, 0.08);
-        padding: 6px 16px;
-        border-radius: 8px;
-        transition: 0.3s ease;
+        color: #006097;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 6px 12px;
+        border-radius: 30px;
         cursor: pointer;
+        text-align: center;
+        transition: 0.3s;
 
         &:hover {
-          background: rgba(0, 0, 0, 0.2);
+          box-shadow: inset 0 0 0 1px #006097;
+          background: rgba(112, 181, 249, 0.15);
         }
       }
     }
