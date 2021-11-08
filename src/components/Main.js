@@ -28,6 +28,68 @@ const Main = () => {
           </button>
         </div>
       </ShareBox>
+      <div>
+        <Article>
+          <SharedActor>
+            <a>
+              <img src="/images/user.svg" alt="" />
+              <div>
+                <span>Title</span>
+                <span>Info</span>
+                <span>Date</span>
+              </div>
+            </a>
+            <button>
+              <a>
+                <img src="/images/elipsis.svg" alt="" />
+              </a>
+            </button>
+          </SharedActor>
+          <Description>Description</Description>
+          <SharedImg>
+            <a>
+              <img src="/images/shared-img.jpg" alt="" />
+            </a>
+          </SharedImg>
+          <SocialCounts>
+            <li>
+              <button>
+                <img
+                  src="https://static-exp1.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt"
+                  alt=""
+                />
+                <img
+                  src="https://static-exp1.licdn.com/sc/h/3wqhxqtk2l554o70ur3kessf1"
+                  alt=""
+                />
+                <img src="https://static-exp1.licdn.com/sc/h/cpho5fghnpme8epox8rdcds22" />
+                <span>1,514 -</span>
+              </button>
+            </li>
+            <li>
+              <a>50 comments</a>
+            </li>
+          </SocialCounts>
+          <Stats>
+            <button>
+              <img src="/images/like-icon.svg" alt="" />
+              <span>Like</span>
+            </button>
+            <button>
+              <img src="/images/comment-icon.svg" alt="" />
+              <span>Comments</span>
+            </button>
+            <button>
+              <img src="/images/share-icon.svg" alt="" />
+              <span>Share</span>
+            </button>
+            <button>
+              <img src="/images/send-icon.svg" alt="" />
+              <span>Send</span>
+            </button>
+          </Stats>
+        </Article>
+      </div>
     </Container>
   );
 };
@@ -107,6 +169,168 @@ const ShareBox = styled(CommonCard)`
           background: rgba(0, 0, 0, 0.08);
         }
       }
+    }
+  }
+`;
+
+const Article = styled(CommonCard)`
+  overflow: visible;
+  padding: 15px;
+  margin-bottom: 10px;
+`;
+
+const SharedActor = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  a {
+    flex-grow: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+
+    & > img {
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin-left: 0.4rem;
+
+      span {
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.6);
+
+        &:first-child {
+          color: #000;
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  button {
+    position: absolute;
+    top: 6px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    padding: 3px;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+`;
+
+const Description = styled.div`
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 0.9rem;
+`;
+
+const SharedImg = styled.div`
+  margin-top: 8px;
+  width: 100%;
+  display: block;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+`;
+
+const SocialCounts = styled.ul`
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  li {
+    margin-right: 0.4rem;
+    color: rgba(0, 0, 0, 0.6);
+
+    button {
+      border: none;
+      outline: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 0.3rem;
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      &:hover > span {
+        color: #0a66c2;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    &:last-child {
+      font-size: 0.8rem;
+
+      a {
+        &:hover {
+          color: #0a66c2;
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+`;
+
+const Stats = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8px;
+
+  button {
+    padding: 10px 8px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.15);
+    }
+    &:hover > span {
+      background: rgba(0, 0, 0, 0);
+    }
+
+    span {
+      font-size: 0.95rem;
+      margin-left: 0.3rem;
+      color: rgba(0, 0, 0, 0.6);
     }
   }
 `;
