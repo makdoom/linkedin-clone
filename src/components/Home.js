@@ -1,12 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Navigate } from "react-router";
 import styled from "styled-components";
 import LeftSide from "./LeftSide";
 import Main from "./Main";
 import RightSide from "./RightSide";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <Container>
+      {!props.user && <Navigate to="/" />}
       <Section>
         <a>
           <p>
@@ -24,7 +27,15 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const Container = styled.div`
   padding: 0 15px;

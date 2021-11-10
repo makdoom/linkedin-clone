@@ -1,103 +1,173 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
+import PostModal from "./PostModal";
+import { getArticleAPI } from "../actions";
+import ReactPlayer from "react-player";
 
-const Main = () => {
+const Main = (props) => {
+  const [showModal, setShowModal] = useState("close");
+
+  useEffect(() => {
+    props.getArticles();
+  }, []);
+
+  const handleClick = (e) => {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
+    switch (showModal) {
+      case "open":
+        setShowModal("close");
+        break;
+      case "close":
+        setShowModal("open");
+        break;
+      default:
+        setShowModal("close");
+        break;
+    }
+  };
   return (
-    <Container>
-      <ShareBox>
-        <div>
-          <img src="/images/user.svg" alt="" />
-          <button>Start a post</button>
-        </div>
-        <div>
-          <button>
-            <img src="/images/photo-icon.svg" alt="" />
-            <span>Photo</span>
-          </button>
-          <button>
-            <img src="/images/video-icon.svg" alt="" />
-            <span>Video</span>
-          </button>
-          <button>
-            <img src="/images/event-icon.svg" alt="" />
-            <span>Event</span>
-          </button>
-          <button>
-            <img src="/images/article-icon.svg" alt="" />
-            <span>Article</span>
-          </button>
-        </div>
-      </ShareBox>
-      <div>
-        <Article>
-          <SharedActor>
-            <a>
-              <img src="/images/user.svg" alt="" />
-              <div>
-                <span>Title</span>
-                <span>Info</span>
-                <span>Date</span>
-              </div>
-            </a>
+    <>
+      <Container>
+        <ShareBox>
+          <div>
+            {props.user && props.user.photoURL ? (
+              <img src={props.user.photoURL} referrerPolicy="no-referrer" />
+            ) : (
+              <img src="/images/user.svg" alt="" referrerPolicy="no-referrer" />
+            )}
+
+            <button onClick={(e) => handleClick(e)}> Start a post</button>
+          </div>
+          <div>
             <button>
-              <a>
-                <img src="/images/elipsis.svg" alt="" />
-              </a>
-            </button>
-          </SharedActor>
-          <Description>Description</Description>
-          <SharedImg>
-            <a>
-              <img src="/images/shared-img.jpg" alt="" />
-            </a>
-          </SharedImg>
-          <SocialCounts>
-            <li>
-              <button>
-                <img
-                  src="https://static-exp1.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt"
-                  alt=""
-                />
-                <img
-                  src="https://static-exp1.licdn.com/sc/h/3wqhxqtk2l554o70ur3kessf1"
-                  alt=""
-                />
-                <img src="https://static-exp1.licdn.com/sc/h/cpho5fghnpme8epox8rdcds22" />
-                <span>1,514 -</span>
-              </button>
-            </li>
-            <li>
-              <a>50 comments</a>
-            </li>
-          </SocialCounts>
-          <Stats>
-            <button>
-              <img src="/images/like-icon.svg" alt="" />
-              <span>Like</span>
+              <img src="/images/photo-icon.svg" alt="" />
+              <span>Photo</span>
             </button>
             <button>
-              <img src="/images/comment-icon.svg" alt="" />
-              <span>Comments</span>
+              <img src="/images/video-icon.svg" alt="" />
+              <span>Video</span>
             </button>
             <button>
-              <img src="/images/share-icon.svg" alt="" />
-              <span>Share</span>
+              <img src="/images/event-icon.svg" alt="" />
+              <span>Event</span>
             </button>
             <button>
-              <img src="/images/send-icon.svg" alt="" />
-              <span>Send</span>
+              <img src="/images/article-icon.svg" alt="" />
+              <span>Article</span>
             </button>
-          </Stats>
-        </Article>
-      </div>
-    </Container>
+          </div>
+        </ShareBox>
+        {props.loading && <img src={"/images/spin.gif"} className="loader" />}
+
+        {props.articles.length === 0 ? (
+          <p>There are no articles </p>
+        ) : (
+          <Content>
+            {props.articles.length > 0 &&
+              props.articles.map((article, key) => (
+                <Article key={key}>
+                  <SharedActor>
+                    <a>
+                      <img src={article.actor.image} alt="" />
+                      <div>
+                        <span>{article.actor.title}</span>
+                        <span>{article.actor.description}</span>
+                        <span>
+                          {article.actor.date.toDate().toLocaleDateString()}
+                        </span>
+                      </div>
+                    </a>
+                    <button>
+                      <a>
+                        <img src="/images/elipsis.svg" alt="" />
+                      </a>
+                    </button>
+                  </SharedActor>
+                  <Description>{article.description}</Description>
+                  <SharedImg>
+                    <a>
+                      {!article.sharedImg && article.video ? (
+                        <ReactPlayer width={"100%"} url={article.video} />
+                      ) : (
+                        article.sharedImg && (
+                          <img src={article.sharedImg} alt="" />
+                        )
+                      )}
+                    </a>
+                  </SharedImg>
+                  <SocialCounts>
+                    <li>
+                      <button>
+                        <img
+                          src="https://static-exp1.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt"
+                          alt=""
+                        />
+                        <img
+                          src="https://static-exp1.licdn.com/sc/h/3wqhxqtk2l554o70ur3kessf1"
+                          alt=""
+                        />
+                        <img src="https://static-exp1.licdn.com/sc/h/cpho5fghnpme8epox8rdcds22" />
+                        <span>1,514 -</span>
+                      </button>
+                    </li>
+                    <li>
+                      <a>{article.comments} comments</a>
+                    </li>
+                  </SocialCounts>
+                  <Stats>
+                    <button>
+                      <img src="/images/like-icon.svg" alt="" />
+                      <span>Like</span>
+                    </button>
+                    <button>
+                      <img src="/images/comment-icon.svg" alt="" />
+                      <span>Comments</span>
+                    </button>
+                    <button>
+                      <img src="/images/share-icon.svg" alt="" />
+                      <span>Share</span>
+                    </button>
+                    <button>
+                      <img src="/images/send-icon.svg" alt="" />
+                      <span>Send</span>
+                    </button>
+                  </Stats>
+                </Article>
+              ))}
+          </Content>
+        )}
+
+        <PostModal showModal={showModal} handleClick={handleClick} />
+      </Container>
+    </>
   );
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.articleState.loading,
+    user: state.userState.user,
+    articles: state.articleState.articles,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getArticles: () => dispatch(getArticleAPI()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
 
 const Container = styled.div`
   grid-area: main;
+  text-align: center;
+
+  & > .loader {
+    width: 35px;
+  }
 `;
 
 const CommonCard = styled.div`
@@ -115,6 +185,7 @@ const CommonCard = styled.div`
 
 const ShareBox = styled(CommonCard)`
   padding: 10px 16px;
+  margin-bottom: 10px;
   div {
     button {
       border: none;
@@ -184,6 +255,7 @@ const SharedActor = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+  text-align: left;
 
   a {
     flex-grow: 1;
@@ -242,6 +314,7 @@ const Description = styled.div`
   overflow: hidden;
   color: rgba(0, 0, 0, 0.9);
   font-size: 0.9rem;
+  text-align: left;
 `;
 
 const SharedImg = styled.div`
@@ -332,5 +405,11 @@ const Stats = styled.div`
       margin-left: 0.3rem;
       color: rgba(0, 0, 0, 0.6);
     }
+  }
+`;
+const Content = styled.div`
+  text-align: center;
+  & > img {
+    width: 30px;
   }
 `;
