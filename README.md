@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# Linkedin Clone
+
+This project is the clone of linkedin created using React, Redux, Styled-components and firebase. [Live Demo](https://linkedin-clone-643c8.web.app/).
+
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
